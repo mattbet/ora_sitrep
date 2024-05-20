@@ -27,9 +27,9 @@ select * from NLS_DATABASE_PARAMETERS where parameter in('NLS_CHARACTERSET','NLS
 select round(value/1048576) PGA_MAX_ALL_MB from v$pgastat where name='maximum PGA allocated';
 select RESOURCE_NAME, CURRENT_UTILIZATION, MAX_UTILIZATION, LIMIT_VALUE from V$RESOURCE_LIMIT where RESOURCE_NAME IN ('sessions', 'processes');
 -- Utenti attivi
-select username, account_status, expiry_date, default_tablespace, temporary_tablespace, profile from dba_users where account_status = 'OPEN';
+select username, account_status, expiry_date, default_tablespace, temporary_tablespace, profile from dba_users where account_status = 'OPEN' order by username;
 -- Utenti non attivi
-select username, account_status, expiry_date, default_tablespace, temporary_tablespace, profile from dba_users where account_status <> 'OPEN';
+select username, account_status, expiry_date, default_tablespace, temporary_tablespace, profile from dba_users where account_status <> 'OPEN' order by username;
 -- DB Links
 select * from DBA_DB_LINKS;
 -- Directories
