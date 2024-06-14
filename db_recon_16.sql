@@ -1,6 +1,6 @@
 -- Nome db_recon.sql
--- Versione 1.6
--- Data: 20240514
+-- Versione 1.7
+-- Data: 20240614
 -- Autore: matteo.bettini@gmail.com
 -- Descrizione: Script ricognizione dati istanza Oracle
 -- Imposta lo spool per i risultati
@@ -23,7 +23,8 @@ select distinct(name) Parametro, display_value Valore from v$parameter
 where name in ('asm_diskgroups','asm_diskstring','cluster_database','cluster_database_instances','compatible','control_files','cpu_count','db_name','db_recovery_file_dest','db_recovery_file_dest_size','db_unique_name','instance_name','instance_type','memory_max_target','memory_target','nls_language','nls_territory','nls_characterset','pga_aggregate_limit','pga_aggregate_target','sessions','sga_max_size','sga_min_size','sga_target','spfile')
 or isdefault='FALSE'
 order by 1;
-select * from NLS_DATABASE_PARAMETERS where parameter in('NLS_CHARACTERSET','NLS_NCHAR_CHARACTERSET');
+-- select * from NLS_DATABASE_PARAMETERS where parameter in('NLS_CHARACTERSET','NLS_NCHAR_CHARACTERSET');
+select * from v$nls_parameters;
 select round(value/1048576) PGA_MAX_ALL_MB from v$pgastat where name='maximum PGA allocated';
 select RESOURCE_NAME, CURRENT_UTILIZATION, MAX_UTILIZATION, LIMIT_VALUE from V$RESOURCE_LIMIT where RESOURCE_NAME IN ('sessions', 'processes');
 -- Utenti attivi
